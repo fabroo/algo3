@@ -7,7 +7,7 @@ using namespace std;
 int acorn(vector<vector<int>> &positions, int t, int h, int f)
 {
     vector<vector<int>> maximos(t, vector<int>(h + 1, 0));
-    vector<int> max_per_height(h + 1, -1); // Initialize with negative infinity
+    vector<int> max_per_height(h + 1, -1); 
 
     for (int altura = 1; altura <= h; altura++)
     {

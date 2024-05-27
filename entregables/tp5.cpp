@@ -1,40 +1,35 @@
 #include <iostream>
 #include <vector>
 #include <cstdio>
-#include <cstring>
+#include <cmath>
 using namespace std;
 
-int minAmount(vector<int> inhabitants, int n)
+long long cantidadMinima(vector<long long> &inhabitants, long long n)
 {
-    int available = 0;
-    int need = 0;
-    int work = 0;
-
-    for (int i = 0; i < n - 1; i++)
-    {
-        if (inhabitants[i] > 0)
-        {
-            need += inhabitants[i];
-        }
-        if (inhabitants[i] <= 0)
-        {
-            available += 1;
-        }
-        int d = need - available;
-        // print d
-        cout << "D: " << d << "\n";
-        work += d;
+    long long workUnits = 0;
+    for (long long i = 0 ; i < n - 1;  i++){
+        workUnits += abs(inhabitants[i]);
+        inhabitants[i + 1] = inhabitants[i + 1] + inhabitants[i];
     }
-    return work;
+    return workUnits;
 }
 
 int main()
 {
-    int n = 5;
-    vector<int> inhabitants = {5, -4, 1, -3, 1};
+    while (true){
+        long long N;
+        cin >> N;
+        if (N == 0){
+            break;
+        }
+        vector<long long> inhabitants(N);
+        for (long long inh = 0; inh < N ; inh++){
+            cin >> inhabitants[inh];
+        }
 
-    int min = minAmount(inhabitants, n);
+        long long minWorkUnits = cantidadMinima(inhabitants, N);
+        printf("%lld\n", minWorkUnits);
+    }
 
-    cout << "la menor cantidad es: " << min << "\n";
     return 0;
 }
